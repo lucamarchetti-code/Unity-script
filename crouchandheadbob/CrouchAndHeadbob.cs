@@ -10,7 +10,7 @@ public class CrouchAndHeadbob : MonoBehaviour
     [HideInInspector]
     public float? defaultHeadYLocalPosition;
     public float crouchYHeadPosition = 1;
-    
+
     public CapsuleCollider colliderToLower;
     [HideInInspector]
     public float? defaultColliderHeight;
@@ -21,18 +21,20 @@ public class CrouchAndHeadbob : MonoBehaviour
     [SerializeField] private float runningBobSpeed = 18f;
     [SerializeField] private float runningBobAmount = 0.1f;
     [SerializeField] private float crouchingBobSpeed = 8f;
-    [SerializeField] private float crouchingBobAmount =0.025f;
-    [SerializeField] private bool allowHeadbob =true;
-    [SerializeField] private bool IsRunning
-    [Range(10f, 100f)] 
-	public float Smooth = 10.0f;
+    [SerializeField] private float crouchingBobAmount = 0.025f;
+    [SerializeField] private bool allowHeadbob = true;
+    [SerializeField]
+    private bool IsRunning
+    [Range(10f, 100f)]
+
+    public float Smooth = 10.0f;
     [Header("Headbob-sideways")]
     [SerializeField] private float walkingBobSpeedx = 8f;
     [SerializeField] private float walkingBobAmountx = 0.007f;
     [SerializeField] private float runningBobSpeedx = 12f;
     [SerializeField] private float runningBobAmountx = 0.01f;
     [SerializeField] private float crouchingBobSpeedx = 10f;
-    [SerializeField] private float crouchingBobAmountx =0.004f;
+    [SerializeField] private float crouchingBobAmountx = 0.004f;
 
     private float defaultYPos = 0;
 
@@ -78,7 +80,7 @@ public class CrouchAndHeadbob : MonoBehaviour
 
                 // Get lowering amount.
                 float loweringAmount;
-                if(defaultHeadYLocalPosition.HasValue)
+                if (defaultHeadYLocalPosition.HasValue)
                 {
                     loweringAmount = defaultHeadYLocalPosition.Value - crouchYHeadPosition;
                 }
@@ -121,23 +123,25 @@ public class CrouchAndHeadbob : MonoBehaviour
                 IsCrouched = false;
             }
         }
-        if(allowHeadbob){
+        if (allowHeadbob)
+        {
             headbob();
         }
     }
 
 
-    void headbob(){
+    void headbob()
+    {
 
         //optional check to only toggle headbob when walking. Just add a bool that determines whether your first person is moving from your movement script into the if condition
         //if the first person is not movin the camera is moved back into its original position
         //if(check if first person is walking){
 
-                Vector3 pos = Vector3.zero;
-		        pos.y += Mathf.Lerp(pos.y, Mathf.Sin(Time.time * (IsCrouched? crouchingBobSpeed : IsRunning ? runningBobSpeed : walkingBobSpeed)) * (IsCrouched? crouchingBobAmount : IsRunning ? runningBobAmount : walkingBobAmount) * 1.4f, Smooth * Time.deltaTime);
-		        pos.x += Mathf.Lerp(pos.x, Mathf.Cos(Time.time * (IsCrouched? crouchingBobSpeedx : IsRunning ? runningBobSpeedx : walkingBobSpeedx) / 2f) * (IsCrouched? crouchingBobAmountx : IsRunning ? runningBobAmountx : walkingBobAmountx) * 1.6f, Smooth * Time.deltaTime);
-		        cameraTransform.localPosition += pos;
-		   
+        Vector3 pos = Vector3.zero;
+        pos.y += Mathf.Lerp(pos.y, Mathf.Sin(Time.time * (IsCrouched ? crouchingBobSpeed : IsRunning ? runningBobSpeed : walkingBobSpeed)) * (IsCrouched ? crouchingBobAmount : IsRunning ? runningBobAmount : walkingBobAmount) * 1.4f, Smooth * Time.deltaTime);
+        pos.x += Mathf.Lerp(pos.x, Mathf.Cos(Time.time * (IsCrouched ? crouchingBobSpeedx : IsRunning ? runningBobSpeedx : walkingBobSpeedx) / 2f) * (IsCrouched ? crouchingBobAmountx : IsRunning ? runningBobAmountx : walkingBobAmountx) * 1.6f, Smooth * Time.deltaTime);
+        cameraTransform.localPosition += pos;
+
         //optional else
         /*}else{
             if (cameraTransform.localPosition == new Vector3(0,0,0)) return;
