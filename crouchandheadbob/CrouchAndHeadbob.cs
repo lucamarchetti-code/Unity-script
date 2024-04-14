@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class CrouchAndHeadbob : MonoBehaviour
 {
+    //crouch button
     public KeyCode key = KeyCode.LeftControl;
 
+    //in the unity interface add here: transform of crouching first person controler, transform of first person camera.
     [Header("Low Head")]
     public Transform headToLower;
     public Transform cameraTransform;
@@ -11,10 +13,12 @@ public class CrouchAndHeadbob : MonoBehaviour
     public float? defaultHeadYLocalPosition;
     public float crouchYHeadPosition = 1;
 
+    //in the unity interface add here: collider of first person controller.
     public CapsuleCollider colliderToLower;
     [HideInInspector]
     public float? defaultColliderHeight;
 
+    //vertical headbob variables. Change them as you see fit.
     [Header("Headbob")]
     [SerializeField] private float walkingBobSpeed = 14f;
     [SerializeField] private float walkingBobAmount = 0.05f;
@@ -23,11 +27,8 @@ public class CrouchAndHeadbob : MonoBehaviour
     [SerializeField] private float crouchingBobSpeed = 8f;
     [SerializeField] private float crouchingBobAmount = 0.025f;
     [SerializeField] private bool allowHeadbob = true;
-    [SerializeField]
-    private bool IsRunning
-    [Range(10f, 100f)]
 
-    public float Smooth = 10.0f;
+    //horizontal headbob variables. Change them as you see fit.
     [Header("Headbob-sideways")]
     [SerializeField] private float walkingBobSpeedx = 8f;
     [SerializeField] private float walkingBobAmountx = 0.007f;
@@ -37,7 +38,8 @@ public class CrouchAndHeadbob : MonoBehaviour
     [SerializeField] private float crouchingBobAmountx = 0.004f;
 
     private float defaultYPos = 0;
-
+    [Range(10f, 100f)]
+    public float Smooth = 10.0f;
     private bool IsRunning = false;
     public bool IsCrouched { get; private set; }
 
